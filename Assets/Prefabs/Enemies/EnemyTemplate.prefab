@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 50948843810062124}
   m_Layer: 0
   m_Name: EnemyTemplate
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -91,6 +91,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyScriptableObject: {fileID: 11400000, guid: 4e8a0d7f7afb74a45b8e8e5b4d21b9cc,
+    type: 2}
+  hitEffect: {fileID: 1256001557233130, guid: 2dd0bdb7830e6644da169b32252dca96, type: 2}
+  destructionEffect: {fileID: 1280240331523082, guid: 45ae5851ef2832044bba82850372d67b,
     type: 2}
 --- !u!114 &114942014272557482
 MonoBehaviour:

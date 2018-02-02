@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Name: Level3
   m_EditorClassIdentifier: 
   skin: {fileID: 21300000, guid: 821c79cdad1bd8545bfe8cecb2f33cc4, type: 3}
-  health: 3
-  fireRate: 1
+  health: 2
   speed: 60
-  Bullet: {fileID: 1495460255174868, guid: fc7020be91b0e554fa6cf8d838aab7f4, type: 2}
   isSelfDirected: 0

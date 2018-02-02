@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - PlayerRay
+  - EnemyBullet
+  - PlayerBullet
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -52,4 +56,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 3022816487
+    locked: 0
+  - name: VFX
+    uniqueID: 1232890653
     locked: 0
