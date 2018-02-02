@@ -9,13 +9,22 @@ public class Enemy : MonoBehaviour {
     int health;
     float fireRate;
     float nextFire;
+    GameObject bullet;
+    public bool isSelfDirected;
 
     private void Start()
+    {
+        DragScriptableObject();
+    }
+
+    void DragScriptableObject()
     {
         GetComponent<SpriteRenderer>().sprite = enemyScriptableObject.skin;
         health = enemyScriptableObject.health;
         fireRate = enemyScriptableObject.fireRate;
-        GetComponent<DirectMoving>().speed = enemyScriptableObject.speed*-1;
+        GetComponent<DirectMoving>().speed = enemyScriptableObject.speed * -1;
+        bullet = enemyScriptableObject.Bullet;
+        isSelfDirected = enemyScriptableObject.isSelfDirected;
     }
 
     private void Update()
@@ -25,10 +34,13 @@ public class Enemy : MonoBehaviour {
             MakeShot();
             nextFire += 1 / fireRate;
         }
+
+        if (isSelfDirected)
+            transform.up = transform.position - PlayerMovement.instance.transform.position;
     }
 
     void MakeShot()
     {
-
+        
     }
 }
