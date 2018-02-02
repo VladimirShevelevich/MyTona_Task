@@ -8,7 +8,7 @@ public class DirectMoving : MonoBehaviour {
 
     private void Update()
     {
-        transform.Translate(Vector3.up * -speed * Time.deltaTime/10);
+        transform.Translate(Vector3.up * speed * Time.deltaTime/10);
     }
 
 }

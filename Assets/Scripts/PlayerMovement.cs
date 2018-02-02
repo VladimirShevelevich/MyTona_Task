@@ -5,10 +5,17 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
 
     public float speed;
+    public float minX, maxX;
+
     float currentSpeed;
 
     private void Update()
     {
-        currentSpeed += Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+        float movement = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+        transform.Translate(Vector3.right * movement);
+
+        float newX = Mathf.Clamp(transform.position.x, minX, maxX);
+        transform.position = new Vector3(newX, transform.position.y, 0);
+        //Pooling_Controller.instance.GetObject(Pooling_Controller.instance.objects.playerBullet);
     }
 }
