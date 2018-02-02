@@ -15,3 +15,5 @@ MonoBehaviour:
   health: 3
   fireRate: 1
   speed: 45
+  Bullet: {fileID: 1495460255174868, guid: fc7020be91b0e554fa6cf8d838aab7f4, type: 2}
+  isSelfDirected: 0

@@ -6,11 +6,10 @@ public class Enemy : MonoBehaviour {
 
     public EnemyScriptableObject enemyScriptableObject;
 
+    public GameObject hitEffect, destructionEffect;
+
     int health;
-    float fireRate;
-    float nextFire;
-    GameObject bullet;
-    public bool isSelfDirected;
+    bool isSelfDirected;
 
     private void Start()
     {
@@ -21,26 +20,39 @@ public class Enemy : MonoBehaviour {
     {
         GetComponent<SpriteRenderer>().sprite = enemyScriptableObject.skin;
         health = enemyScriptableObject.health;
-        fireRate = enemyScriptableObject.fireRate;
         GetComponent<DirectMoving>().speed = enemyScriptableObject.speed * -1;
-        bullet = enemyScriptableObject.Bullet;
         isSelfDirected = enemyScriptableObject.isSelfDirected;
     }
 
     private void Update()
     {
-        if (Time.time > nextFire)
-        {
-            MakeShot();
-            nextFire += 1 / fireRate;
-        }
-
-        if (isSelfDirected)
+        if (isSelfDirected && PlayerMovement.instance != null)
             transform.up = transform.position - PlayerMovement.instance.transform.position;
     }
 
-    void MakeShot()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if (collision.tag == "PlayerBullet")
+        {
+            Destroy(collision.gameObject);
+            GetDamage();
+        }
     }
+
+    void GetDamage()
+    {
+        health--;
+        if (health > 0) 
+            Instantiate(hitEffect, transform.position, Quaternion.identity, transform);
+        else
+            Desctruction();
+    }
+
+    void Desctruction()
+    {
+        Instantiate(destructionEffect, transform.position, Quaternion.identity);
+        SoundController.instance.PlaySound(SoundController.instance.enemyExplosion);
+        Destroy(gameObject);
+    }
+    
 }

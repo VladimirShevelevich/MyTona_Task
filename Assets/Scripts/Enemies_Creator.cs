@@ -11,6 +11,14 @@ public class Enemies_Creator : MonoBehaviour {
     public GameObject EnemyTemplate;
     public EnemyScriptableObject[] enemies;
 
+    public static Enemies_Creator instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
+
     private void Start()
     {
         leftBorder = PlayerMovement.instance.minX;

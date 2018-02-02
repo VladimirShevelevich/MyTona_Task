@@ -7,9 +7,7 @@ public class EnemyScriptableObject : ScriptableObject {
 
     public Sprite skin;
     public int health;
-    public float fireRate;
     public float speed;
-    public GameObject Bullet;
     public bool isSelfDirected;
 
 }
