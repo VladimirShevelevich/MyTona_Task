@@ -9,6 +9,14 @@ public class PlayerMovement : MonoBehaviour {
 
     float currentSpeed;
 
+    public static PlayerMovement instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
+
     private void Update()
     {
         float movement = Input.GetAxis("Horizontal") * speed * Time.deltaTime;

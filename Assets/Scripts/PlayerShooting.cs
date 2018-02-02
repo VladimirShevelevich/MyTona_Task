@@ -6,7 +6,6 @@ public class PlayerShooting : MonoBehaviour {
 
     public GameObject bullet;
     public float fireRate;
-    public float bulletSpeed;
     public Transform Gun;
 
     float nextFire;
