@@ -8,6 +8,9 @@ public class Enemy : MonoBehaviour {
 
     public GameObject hitEffect, destructionEffect;
 
+    public delegate void EnemyDeathEventHandler();
+    public static event EnemyDeathEventHandler EnemyDeath;
+
     int health;
     bool isSelfDirected;
 
@@ -42,8 +45,11 @@ public class Enemy : MonoBehaviour {
     void GetDamage()
     {
         health--;
-        if (health > 0) 
+        if (health > 0)
+        {
             Instantiate(hitEffect, transform.position, Quaternion.identity, transform);
+            SoundController.instance.PlaySound(SoundController.instance.hit);
+        }
         else
             Desctruction();
     }
@@ -53,6 +59,17 @@ public class Enemy : MonoBehaviour {
         Instantiate(destructionEffect, transform.position, Quaternion.identity);
         SoundController.instance.PlaySound(SoundController.instance.enemyExplosion);
         Destroy(gameObject);
+    }
+
+    private void OnDisable()
+    {
+        OnEnemyDeath();
+    }
+
+    void OnEnemyDeath()
+    {
+        if (EnemyDeath != null)
+            EnemyDeath();
     }
     
 }

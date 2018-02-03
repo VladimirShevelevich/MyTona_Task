@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class Enemies_Creator : MonoBehaviour {
 
-    public float CreationFrequancy;
+    public int enemiesAmount;
+    public float creationFrequancy;
 
     float leftBorder, rightBorder;
 
     public GameObject EnemyTemplate;
     public EnemyScriptableObject[] enemies;
 
+    public delegate void EnemiesAreOverEventHandler();
+    public static event EnemiesAreOverEventHandler EnemiesAreOver;
     public static Enemies_Creator instance;
 
     private void Awake()
@@ -29,22 +32,30 @@ public class Enemies_Creator : MonoBehaviour {
 
     IEnumerator EnemiesCreation()
     {
-        while (true)
+        while (enemiesAmount > 0)
         {
             CreateEnemy();
-            yield return new WaitForSeconds(CreationFrequancy);
+            yield return new WaitForSeconds(creationFrequancy);
         }
+        OnEnemiesAreOver();
     }
 
     void CreateEnemy()
-    {
+    {      
         Vector3 newEnemyPosition = new Vector3
             (Random.Range(leftBorder, rightBorder),
             transform.position.y,
-            0
+                0
             );
         EnemyScriptableObject randomEnemy = enemies[Random.Range(0, enemies.Length)];
         GameObject newEnemy = Instantiate(EnemyTemplate, newEnemyPosition, Quaternion.identity);
         newEnemy.GetComponent<Enemy>().enemyScriptableObject = randomEnemy;
+        enemiesAmount--;        
+    }
+
+    void OnEnemiesAreOver()
+    {
+        if (EnemiesAreOver != null)
+            EnemiesAreOver();
     }
 }
