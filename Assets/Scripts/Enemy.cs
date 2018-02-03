@@ -11,6 +11,10 @@ public class Enemy : MonoBehaviour {
     public delegate void EnemyDeathEventHandler();
     public static event EnemyDeathEventHandler EnemyDeath;
 
+    public delegate void EnemiesAreOverEventHandler();
+    public static event EnemyDeathEventHandler EnemiesAreOver;
+
+
     int health;
     bool isSelfDirected;
 
@@ -67,5 +71,19 @@ public class Enemy : MonoBehaviour {
         if (EnemyDeath != null)
             EnemyDeath();
     }
-    
+
+    private void OnDisable()
+    {
+        if (tag == "LastEnemy")
+        {
+            OnEnemiesAreOver();
+        }
+    }
+
+    void OnEnemiesAreOver()
+    {
+        if (EnemiesAreOver != null)
+            EnemiesAreOver();
+    }
+
 }

@@ -6,8 +6,8 @@ public class GameController : MonoBehaviour {
 
     public Text scoreText;
 
-    int score;
-    public bool gameIsOver;
+    public int score;
+    public GameObject gameOverPanel;
 
     public static GameController instance;
 
@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour {
     {
         Enemy.EnemyDeath += OnEnemyDeath;
         Player.PlayerDeath += OnPlayerDeath;
+        Enemy.EnemiesAreOver += OnEnemiesAreOver;
     }
 
     private void Awake()
@@ -60,20 +61,36 @@ public class GameController : MonoBehaviour {
         scoreText.text = score.ToString();
     }
 
-    void Victory()
+    public void Victory()
     {
-        Debug.Log("Victory");
+        gameOverPanel.SetActive(true);
     }
 
     void OnPlayerDeath()
     {
-        gameIsOver = true;
+        GameOver();
+    }
+
+    void OnEnemiesAreOver()
+    {
+        GameOver();
+    }
+
+    void GameOver()
+    {
+        gameOverPanel.SetActive(true);
+    }
+
+    public bool IsPlayerAlive()
+    {
+        return PlayerMovement.instance != null;
     }
 
     private void OnDisable()
     {
         Enemy.EnemyDeath -= OnEnemyDeath;
         Player.PlayerDeath -= OnPlayerDeath;
+        Enemy.EnemiesAreOver -= OnEnemiesAreOver;
     }
 
 }

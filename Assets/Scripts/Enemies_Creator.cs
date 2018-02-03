@@ -31,7 +31,7 @@ public class Enemies_Creator : MonoBehaviour {
 
     IEnumerator EnemiesCreation()
     {
-        while (enemiesAmount > 0 && !GameController.instance.gameIsOver)
+        while (enemiesAmount > 0 && GameController.instance.IsPlayerAlive())
         {
             CreateEnemy();
             yield return new WaitForSeconds(creationFrequancy);
@@ -48,6 +48,8 @@ public class Enemies_Creator : MonoBehaviour {
         EnemyScriptableObject randomEnemy = enemies[Random.Range(0, enemies.Length)];
         GameObject newEnemy = Instantiate(EnemyTemplate, newEnemyPosition, Quaternion.identity, EnemiesParent);
         newEnemy.GetComponent<Enemy>().enemyScriptableObject = randomEnemy;
+        if (enemiesAmount == 1)
+            newEnemy.tag = "LastEnemy";
         enemiesAmount--;        
     }
 }
