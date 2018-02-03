@@ -6,6 +6,7 @@ public class SoundController : MonoBehaviour {
 
     public AudioClip enemyExplosion;
     public AudioClip playerExplosion;
+    public AudioClip hit;
 
     AudioSource audioSource;
 
