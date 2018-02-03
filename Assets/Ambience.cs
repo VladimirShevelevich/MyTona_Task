@@ -6,22 +6,24 @@ public class Ambience : MonoBehaviour {
 
     public GameObject[] planets;
 
-    int index;
+    private void Start()
+    {
+        StartCoroutine(CreationPlanets());
+    }
 
     IEnumerator CreationPlanets()
     {
+        yield return new WaitForSeconds(3);
         while (true)
-        {
-            yield return new WaitForSeconds(10);
+        {           
             CreatePlanet();
+            yield return new WaitForSeconds(30);
         }
     }
 
     void CreatePlanet()
     {
-        Instantiate(planets[index], planets[index].transform.position, Quaternion.identity);
-        index++;
-        if (index >= planets.Length)
-            index = 0;
+        GameObject randomPlanet = planets[Random.Range(0, planets.Length)];
+        Instantiate(randomPlanet, randomPlanet.transform.position, Quaternion.identity);
     }
 }
