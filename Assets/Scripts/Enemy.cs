@@ -58,12 +58,8 @@ public class Enemy : MonoBehaviour {
     {
         Instantiate(destructionEffect, transform.position, Quaternion.identity);
         SoundController.instance.PlaySound(SoundController.instance.enemyExplosion);
-        Destroy(gameObject);
-    }
-
-    private void OnDisable()
-    {
         OnEnemyDeath();
+        Destroy(gameObject);
     }
 
     void OnEnemyDeath()

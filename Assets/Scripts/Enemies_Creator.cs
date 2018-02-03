@@ -11,9 +11,8 @@ public class Enemies_Creator : MonoBehaviour {
 
     public GameObject EnemyTemplate;
     public EnemyScriptableObject[] enemies;
-
-    public delegate void EnemiesAreOverEventHandler();
-    public static event EnemiesAreOverEventHandler EnemiesAreOver;
+    public Transform EnemiesParent;
+    
     public static Enemies_Creator instance;
 
     private void Awake()
@@ -32,12 +31,11 @@ public class Enemies_Creator : MonoBehaviour {
 
     IEnumerator EnemiesCreation()
     {
-        while (enemiesAmount > 0)
+        while (enemiesAmount > 0 && !GameController.instance.gameIsOver)
         {
             CreateEnemy();
             yield return new WaitForSeconds(creationFrequancy);
         }
-        OnEnemiesAreOver();
     }
 
     void CreateEnemy()
@@ -48,14 +46,8 @@ public class Enemies_Creator : MonoBehaviour {
                 0
             );
         EnemyScriptableObject randomEnemy = enemies[Random.Range(0, enemies.Length)];
-        GameObject newEnemy = Instantiate(EnemyTemplate, newEnemyPosition, Quaternion.identity);
+        GameObject newEnemy = Instantiate(EnemyTemplate, newEnemyPosition, Quaternion.identity, EnemiesParent);
         newEnemy.GetComponent<Enemy>().enemyScriptableObject = randomEnemy;
         enemiesAmount--;        
-    }
-
-    void OnEnemiesAreOver()
-    {
-        if (EnemiesAreOver != null)
-            EnemiesAreOver();
     }
 }

@@ -7,11 +7,20 @@ public class GameController : MonoBehaviour {
     public Text scoreText;
 
     int score;
+    public bool gameIsOver;
+
+    public static GameController instance;
 
     private void OnEnable()
     {
         Enemy.EnemyDeath += OnEnemyDeath;
-        Enemies_Creator.EnemiesAreOver += OnEnemyAreOver;
+        Player.PlayerDeath += OnPlayerDeath;
+    }
+
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
     }
 
     private void Start()
@@ -37,12 +46,7 @@ public class GameController : MonoBehaviour {
 
     void OnEnemyDeath()
     {
-        AddScore(10);
-    }
-
-    void OnEnemyAreOver()
-    {
-
+        AddScore(10);            
     }
 
     void AddScore(int score)
@@ -56,10 +60,20 @@ public class GameController : MonoBehaviour {
         scoreText.text = score.ToString();
     }
 
+    void Victory()
+    {
+        Debug.Log("Victory");
+    }
+
+    void OnPlayerDeath()
+    {
+        gameIsOver = true;
+    }
+
     private void OnDisable()
     {
         Enemy.EnemyDeath -= OnEnemyDeath;
-        Enemies_Creator.EnemiesAreOver -= OnEnemyAreOver;
+        Player.PlayerDeath -= OnPlayerDeath;
     }
 
 }

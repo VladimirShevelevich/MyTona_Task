@@ -6,6 +6,9 @@ public class Player : MonoBehaviour {
 
     public GameObject destructionVFX;
 
+    public delegate void PlayerDeathEventHandler();
+    public static event PlayerDeathEventHandler PlayerDeath;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Enemy")
@@ -19,6 +22,13 @@ public class Player : MonoBehaviour {
     {
         Instantiate(destructionVFX, transform.position, Quaternion.identity);
         SoundController.instance.PlaySound(SoundController.instance.playerExplosion);
+        OnPlayerDeath();
         Destroy(gameObject);
+    }
+
+    void OnPlayerDeath()
+    {
+        if (PlayerDeath != null)
+            PlayerDeath();
     }
 }

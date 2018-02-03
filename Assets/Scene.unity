@@ -363,6 +363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1166595282}
+  gameIsOver: 0
 --- !u!1 &867256004
 GameObject:
   m_ObjectHideFlags: 0
@@ -1128,6 +1129,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1717111216
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1717111217}
+  m_Layer: 0
+  m_Name: Enemies
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1717111217
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1717111216}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1867797612
 GameObject:
   m_ObjectHideFlags: 0
@@ -1185,7 +1214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemiesAmount: 10
-  creationFrequancy: 1.5
+  creationFrequancy: 1.4
   EnemyTemplate: {fileID: 1245646785819572, guid: 6b470a71c5f55194b836ce5861e90bb7,
     type: 2}
   enemies:
@@ -1196,6 +1225,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4e8a0d7f7afb74a45b8e8e5b4d21b9cc, type: 2}
   - {fileID: 11400000, guid: 125f02ee1c40a6749ab6d1d1be931620, type: 2}
   - {fileID: 11400000, guid: f454b4674133df94bb4aa463020d06d6, type: 2}
+  EnemiesParent: {fileID: 1717111217}
 --- !u!4 &1975571910
 Transform:
   m_ObjectHideFlags: 0
