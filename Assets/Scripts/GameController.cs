@@ -7,7 +7,7 @@ public class GameController : MonoBehaviour {
     public Text scoreText;
 
     public int score;
-    public GameObject gameOverPanel;
+    public bool playMode;
 
     public static GameController instance;
 
@@ -26,9 +26,11 @@ public class GameController : MonoBehaviour {
 
     private void Start()
     {
+        playMode = true;
         StartCoroutine(Difficulty());
         UpdateScore();
     }
+
 
     IEnumerator Difficulty()
     {
@@ -63,7 +65,8 @@ public class GameController : MonoBehaviour {
 
     public void Victory()
     {
-        gameOverPanel.SetActive(true);
+        UIController.instance.gameOverPanel.SetActive(true);
+        playMode = false;
     }
 
     void OnPlayerDeath()
@@ -78,7 +81,8 @@ public class GameController : MonoBehaviour {
 
     void GameOver()
     {
-        gameOverPanel.SetActive(true);
+        playMode = false;
+        UIController.instance.gameOverPanel.SetActive(true);
     }
 
     public bool IsPlayerAlive()

@@ -74,7 +74,7 @@ public class Enemy : MonoBehaviour {
 
     private void OnDisable()
     {
-        if (tag == "LastEnemy")
+        if (AreEnemiesOver())
         {
             OnEnemiesAreOver();
         }
@@ -84,6 +84,11 @@ public class Enemy : MonoBehaviour {
     {
         if (EnemiesAreOver != null)
             EnemiesAreOver();
+    }
+
+    bool AreEnemiesOver()
+    {
+        return Enemies_Creator.instance.enemiesAmount < 1 && Enemies_Creator.instance.EnemiesParent.childCount == 1;
     }
 
 }
