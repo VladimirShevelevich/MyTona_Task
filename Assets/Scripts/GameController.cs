@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour {
 
     private void Start()
     {
+        Time.timeScale = 1;
         playMode = true;
         StartCoroutine(Difficulty());
         UpdateScore();
@@ -43,7 +44,7 @@ public class GameController : MonoBehaviour {
 
     void IncreaseDifficulty()
     {
-        if (Enemies_Creator.instance.creationFrequancy > 0.7f)
+        if (Enemies_Creator.instance.creationFrequancy > 0.4f)
             Enemies_Creator.instance.creationFrequancy -= 0.05f;
     }
 
