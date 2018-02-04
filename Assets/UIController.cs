@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +7,9 @@ public class UIController : MonoBehaviour
 
     public GameObject gameOverPanel;
     public GameObject menuPanel;
+    public GameObject menuBackPanel;
+    public GameObject optionsPanel;
+    public Text muteText;
 
     public static UIController instance;
 
@@ -22,6 +24,8 @@ public class UIController : MonoBehaviour
     private void Start()
     {
         menuPanel.SetActive(false);
+        menuBackPanel.SetActive(false);
+        optionsPanel.SetActive(false);
     }
 
     private void Update()
@@ -38,6 +42,8 @@ public class UIController : MonoBehaviour
         if (Time.timeScale == 1)
         {
             menuPanel.SetActive(true);
+            menuBackPanel.SetActive(true);
+            optionsPanel.SetActive(false);
             Time.timeScale = 0;
         }
         else
@@ -45,5 +51,34 @@ public class UIController : MonoBehaviour
             menuPanel.SetActive(false);
             Time.timeScale = 1;
         }
+    }
+
+    public void Options()
+    {
+        if (!optionsPanel.activeSelf)
+        {
+            menuBackPanel.SetActive(false);
+            optionsPanel.SetActive(true);
+            UpdateMuteButton();
+        }
+        else
+        {
+            menuBackPanel.SetActive(true);
+            optionsPanel.SetActive(false);
+        }
+    }
+
+    public void Mute()
+    {
+        SoundController.instance.Mute();
+        UpdateMuteButton();
+    }
+
+    void UpdateMuteButton()
+    {
+        if (SoundController.MUTE)
+            muteText.text = "unmute";
+        else
+            muteText.text = "mute";
     }
 }

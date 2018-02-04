@@ -8,6 +8,8 @@ public class SoundController : MonoBehaviour {
     public AudioClip playerExplosion;
     public AudioClip hit;
 
+    public static bool MUTE;
+
     AudioSource audioSource;
 
     public static SoundController instance;
@@ -16,15 +18,35 @@ public class SoundController : MonoBehaviour {
     {
         if (instance == null)
             instance = this;
+        else
+            Destroy(gameObject);
     }
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        if (!MUTE)
+            audioSource.Play();
+        DontDestroyOnLoad(gameObject);
     }
 
     public void PlaySound(AudioClip sound)
     {
-        audioSource.PlayOneShot(sound);
+        if (!MUTE)
+            audioSource.PlayOneShot(sound);
+    }
+
+    public void Mute()
+    {
+        if (!MUTE)
+        {
+            MUTE = true;
+            audioSource.Stop();
+        }
+        else
+        {
+            MUTE = false;
+            audioSource.Play();
+        }
     }
 }
