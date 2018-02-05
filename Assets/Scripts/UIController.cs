@@ -18,8 +18,6 @@ public class UIController : MonoBehaviour
         {
             instance = this;
         }
-        else
-            Destroy(gameObject);
     }
 
     private void Start()

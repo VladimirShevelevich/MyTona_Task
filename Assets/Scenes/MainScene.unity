@@ -1412,7 +1412,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 752c265bac8312c46b727ce8ba1d9990, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.3
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -6138,7 +6138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1256bb610963c1541be2843a6a796675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiesAmount: 40
+  enemiesAmount: 35
   creationFrequancy: 1.2
   EnemyTemplate: {fileID: 1245646785819572, guid: 6b470a71c5f55194b836ce5861e90bb7,
     type: 2}
