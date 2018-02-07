@@ -1,13 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine.Networking;
 using UnityEngine;
+using System;
 
-public class Player : MonoBehaviour {
+public class Player : NetworkBehaviour {
 
     public GameObject destructionVFX;
 
     public delegate void PlayerDeathEventHandler();
     public static event PlayerDeathEventHandler PlayerDeath;
+
+    public override void OnStartLocalPlayer()
+    {
+        ChangeColor();
+    }
+
+    void ChangeColor()
+    {
+        GetComponent<SpriteRenderer>().color = Color.white;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine.Networking;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
+
+public class PlayerMovement : NetworkBehaviour {
 
     public float speed;
     public float minX, maxX;
@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Update()
     {
+        if (!isLocalPlayer)
+            return;
         if (GameController.instance.playMode)
             Move();
     }
